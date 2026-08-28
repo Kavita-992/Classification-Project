@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Airbnb Room Type Predictor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span class="logo">✦</span><span>StaySense</span></div>
+      <div class="model-badge"><span class="dot"></span> ML Model Online</div>
+      <div class="side-copy">
+        <p class="eyebrow">CLASSIFICATION PROJECT</p>
+        <h2>NYC Airbnb<br/>Room Predictor</h2>
+        <p>Enter listing details and let the trained machine-learning model predict the room type.</p>
+      </div>
+      <div class="skyline" aria-hidden="true">
+        <span style="height:38%"></span><span style="height:58%"></span><span style="height:45%"></span>
+        <span style="height:75%"></span><span style="height:52%"></span><span style="height:88%"></span>
+        <span style="height:63%"></span><span style="height:96%"></span><span style="height:49%"></span>
+        <span style="height:70%"></span><span style="height:42%"></span>
+      </div>
+      <div class="api-status"><span id="apiDot" class="dot"></span><span id="apiStatus">Checking API...</span></div>
+    </aside>
+
+    <main class="content">
+      <header>
+        <div>
+          <p class="eyebrow">SMART CLASSIFICATION</p>
+          <h1>Predict your Airbnb room type</h1>
+          <p class="subtitle">Fill in realistic listing information to get an instant prediction.</p>
+        </div>
+        <button id="exampleBtn" class="secondary-btn">Try Example</button>
+      </header>
+
+      <section class="grid">
+        <form id="predictionForm" class="card form-card">
+          <div class="section-title"><span>Listing details</span><small>All fields are required</small></div>
+
+          <div class="fields">
+            <label>Latitude<input type="number" step="any" name="latitude" placeholder="40.7128" required></label>
+            <label>Longitude<input type="number" step="any" name="longitude" placeholder="-74.0060" required></label>
+            <label>Price ($)<input type="number" step="any" min="0.01" name="price" placeholder="150" required></label>
+            <label>Minimum nights<input type="number" min="1" name="minimum_nights" placeholder="2" required></label>
+            <label>Number of reviews<input type="number" min="0" name="number_of_reviews" placeholder="35" required></label>
+            <label>Reviews per month<input type="number" step="any" min="0" name="reviews_per_month" placeholder="1.20" required></label>
+            <label>Host listings count<input type="number" min="0" name="calculated_host_listings_count" placeholder="1" required></label>
+            <label>Availability (365)<input type="number" min="0" max="365" name="availability_365" placeholder="120" required></label>
+            <label>Neighbourhood group
+              <input type="text" name="neighbourhood_group" placeholder="Manhattan" required>
+            </label>
+            <label>Neighbourhood
+              <input type="text" name="neighbourhood" placeholder="Harlem" required>
+            </label>
+          </div>
+
+          <button id="predictBtn" type="submit" class="predict-btn">
+            <span>Predict Room Type</span><span>→</span>
+          </button>
+        </form>
+
+        <section class="right-column">
+          <div id="resultCard" class="card result-card">
+            <p class="eyebrow">MODEL RESULT</p>
+            <div id="emptyState" class="empty-state">
+              <div class="orb">⌁</div>
+              <h3>Ready to predict</h3>
+              <p>Your room classification will appear here.</p>
+            </div>
+
+            <div id="resultState" class="hidden">
+              <p class="result-label">PREDICTED ROOM TYPE</p>
+              <h2 id="prediction">—</h2>
+              <p id="resultMessage" class="result-message"></p>
+              <div class="confidence-head"><span>Class probabilities</span><span id="topConfidence">—</span></div>
+              <div id="probabilities" class="probabilities"></div>
+            </div>
+          </div>
+
+          <div class="card info-card">
+            <p class="eyebrow">HOW IT WORKS</p>
+            <div class="steps">
+              <div><b>01</b><span>Enter listing information</span></div>
+              <div><b>02</b><span>Data is sent to FastAPI</span></div>
+              <div><b>03</b><span>Pipeline returns prediction</span></div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
